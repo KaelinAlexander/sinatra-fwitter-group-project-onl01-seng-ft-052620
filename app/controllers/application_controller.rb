@@ -62,6 +62,12 @@ class ApplicationController < Sinatra::Base
   #   redirect '/tweets/show'
   # end
 
+  get '/show' do
+    redirect_to_if_not_logged_in
+    redirect '/tweets/show/:id'
+  end
+
+
   helpers do
     def redirect_to_if_logged_in
       redirect '/tweets' if logged_in?

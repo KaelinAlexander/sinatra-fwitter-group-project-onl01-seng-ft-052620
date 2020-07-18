@@ -18,6 +18,11 @@ class TweetsController < ApplicationController
   #   erb :'tweets/show'
   # end
 
+  get '/tweets/show' do
+    @tweet = Tweet.find_by_id(params[:id])
+    erb :'tweets/show'
+  end
+
   post '/tweets' do
     @tweet = current_user.tweets.build(params)
     if @tweet.save
@@ -31,6 +36,7 @@ class TweetsController < ApplicationController
     redirect_to_if_not_logged_in
     @tweet = Tweet.find_by_id(params[:id])
     erb :'tweets/show'
+    redirect '/tweets/show'
   end
 
   get '/tweets/:id/edit' do
